@@ -34,7 +34,7 @@ export default function SearchTest() {
     <div className="p-6 max-w-5xl mx-auto">
       <Toaster position="top-center" />
 
-      {/* 🔍 Search Bar */}
+    
       <div className="relative mb-6">
         <input
           type="text"
@@ -45,24 +45,37 @@ export default function SearchTest() {
         />
       </div>
 
-      {/* 🧱 Grid Results */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
         {filtered.slice(0, 30).map((item, index) => (
           <div
             key={index}
-            className="p-4 rounded-2xl border  hover:shadow-md transition flex flex-col justify-between"
+            className="group p-5 rounded-2xl border border-gray-200 bg-white 
+      hover:shadow-xl hover:-translate-y-1 transition-all duration-300 
+      flex flex-col justify-between"
           >
+          
             <div>
-              <p className="text-sm text-gray-500 mb-1">Test Name</p>
-              <p className="font-semibold text-lg">{item.name}</p>
+              <p className="text-xs text-gray-400 uppercase tracking-wide mb-1">
+                Test Name
+              </p>
+
+              <p className="font-semibold text-lg text-gray-900 group-hover:text-black transition">
+                {item.name}
+              </p>
             </div>
 
-            <div className="flex items-center justify-between mt-4">
-              <span className="font-bold ">{item.code}</span>
+            {/* Bottom Section */}
+            <div className="flex items-center justify-between mt-6">
+              <span className="font-mono text-sm bg-gray-100 px-3 py-1 rounded-lg text-gray-700">
+                {item.code}
+              </span>
 
               <button
                 onClick={() => handleCopy(item.code)}
-                className="text-sm px-3 py-1 cursor-pointer rounded-lg border hover:bg-black hover:text-white transition"
+                className="text-sm px-4 py-1.5 rounded-xl border border-gray-300 
+          bg-white hover:bg-black hover:text-white 
+          transition-all duration-300 active:scale-95"
               >
                 Copy
               </button>
@@ -71,7 +84,6 @@ export default function SearchTest() {
         ))}
       </div>
 
-      {/* 😶 Empty state */}
       {filtered.length === 0 && (
         <p className="text-center text-gray-500 mt-10">No results found</p>
       )}
