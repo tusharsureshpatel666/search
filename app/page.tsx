@@ -6,6 +6,7 @@ import toast, { Toaster } from "react-hot-toast";
 export default function SearchTest() {
   const [query, setQuery] = useState("");
   const [datas, setDatas] = useState<any[]>([]);
+  const [copyList, setCopyList] = useState<string[]>([]);
 
   useEffect(() => {
     const handleres = async () => {
@@ -15,6 +16,18 @@ export default function SearchTest() {
     };
     handleres();
   }, []);
+  const addToCopyList = (code: string) => {
+    setCopyList((prev) => {
+      if (prev.includes(code)) return prev; // avoid duplicate
+      return [...prev, code];
+    });
+  };
+  const removeFromCopyList = (code: string) => {
+    setCopyList((prev) => prev.filter((item) => item !== code));
+  };
+  const clearCopyList = () => {
+    setCopyList([]);
+  };
 
   const normalize = (str: string) =>
     str.toLowerCase().replace(/[^a-z0-9]/g, "");
@@ -29,6 +42,26 @@ export default function SearchTest() {
     navigator.clipboard.writeText(code);
     toast.success(`Copied: ${code}`);
   };
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Check Ctrl + number
+      if (e.ctrlKey && /^[1-9]$/.test(e.key)) {
+        e.preventDefault(); // stop browser default
+
+        const index = Number(e.key) - 1;
+        const code = copyList[index];
+
+        if (code) {
+          navigator.clipboard.writeText(code);
+          toast.success(`Copied: ${code}`);
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [copyList]);
 
   return (
     <div className="p-6 max-w-5xl mx-auto bg-white dark:bg-black transition-colors duration-300">
@@ -47,6 +80,72 @@ export default function SearchTest() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
+      </div>
+
+      <div className="mb-6 p-5 rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-sm">
+        {/* Header */}
+        <div className="flex items-center justify-between mb-4">
+          <p className="text-sm font-semibold text-gray-800 dark:text-gray-200">
+            Copied List
+          </p>
+
+          {/* <button
+            onClick={copyAll}
+            className="text-xs px-3 py-1.5 rounded-xl bg-black text-white 
+      dark:bg-white dark:text-black hover:opacity-80 transition"
+          >
+            Copy All
+          </button> */}
+        </div>
+
+        {/* List */}
+        <div className="flex flex-wrap gap-3">
+          {copyList.map((code, index) => (
+            <div
+              key={index}
+              className="group flex items-center gap-2 px-3 py-2 rounded-xl 
+        bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700
+        hover:shadow-md transition"
+            >
+              {/* Index */}
+              <span className="text-xs text-gray-400 w-5">{index + 1}.</span>
+
+              {/* Code */}
+              <span className="font-mono text-sm text-gray-800 dark:text-gray-200">
+                {code}
+              </span>
+
+              {/* Actions */}
+              <div className="flex items-center gap-1 ml-2  transition">
+                <button
+                  onClick={() => handleCopy(code)}
+                  className="text-xs px-2 py-1 rounded-md 
+            bg-black text-white cursor-pointer dark:bg-white dark:text-black 
+            hover:scale-95 transition"
+                >
+                  Copy
+                </button>
+
+                <button
+                  onClick={() => removeFromCopyList(code)}
+                  className="text-xs px-2 cursor-pointer py-1 rounded-md 
+            bg-red-500 text-white 
+            hover:scale-95 transition"
+                >
+                  ✕
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Hint */}
+        {copyList.length > 0 && (
+          <p className="text-xs text-gray-400 mt-4">
+            Tip: Press <span className="font-medium">Ctrl + 1, 2, 3...</span> to
+            quickly copy items
+          </p>
+        )}
       </div>
 
       {/* Grid */}
@@ -95,6 +194,17 @@ export default function SearchTest() {
                 transition-all duration-300 active:scale-95"
               >
                 Copy
+              </button>
+              <button
+                className="text-sm px-4 py-1.5 rounded-xl border cursor-pointer 
+                border-gray-300 bg-white text-black
+                dark:border-gray-600 dark:bg-gray-800 dark:text-white
+                hover:bg-black hover:text-white 
+                dark:hover:bg-white dark:hover:text-black
+                transition-all duration-300 active:scale-95"
+                onClick={() => addToCopyList(item.code)}
+              >
+                Add
               </button>
             </div>
           </div>
