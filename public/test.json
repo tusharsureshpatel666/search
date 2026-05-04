@@ -93,7 +93,8 @@
      {"code": "S237", "name": "HIV RAPID"},
      {"code": "S238", "name": "HBSAG(R)"},
      {"code": "S058", "name": "VDRL"},
-      {"code": "S2368", "name": "HCV RAPID"}
+      {"code": "S2368", "name": "HCV RAPID"},
+      {"code": "C176", "name": "IGE"}
 
     
 
