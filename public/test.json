@@ -101,7 +101,11 @@
       {"code": "C057", "name": "CEA"},
        {"code": "C013", "name": "ACR"},
         {"code": "S112", "name": "TB GOLD"},
-         {"code": "M023", "name": "SUPUTUM"}
+         {"code": "M023", "name": "SUPUTUM"},
+          {"code": "C258", "name": "URINE PROTEIN CREATINE RATIO"},
+           {"code": "C175", "name": "TROP I "},
+            {"code": "C013", "name": "UACR"},
+             {"code": "C030", "name": "ACR"}
       
 
       
