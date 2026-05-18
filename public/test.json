@@ -98,7 +98,11 @@
         {"code": "C244", "name": "CFRA21.1"},
       {"code": "C022", "name": "AFP"},
       {"code": "C051", "name": "CA19.9"},
-      {"code": "C057", "name": "CEA"}
+      {"code": "C057", "name": "CEA"},
+       {"code": "C013", "name": "ACR"},
+        {"code": "S112", "name": "TB GOLD"},
+         {"code": "M023", "name": "SUPUTUM"}
+      
 
       
 
