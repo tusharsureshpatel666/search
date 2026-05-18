@@ -94,7 +94,15 @@
      {"code": "S238", "name": "HBSAG(R)"},
      {"code": "S058", "name": "VDRL"},
       {"code": "S2368", "name": "HCV RAPID"},
-      {"code": "C176", "name": "IGE"}
+        {"code": "C176", "name": "IGE"},
+        {"code": "C244", "name": "CFRA21.1"},
+      {"code": "C022", "name": "AFP"},
+      {"code": "C051", "name": "CA19.9"},
+      {"code": "C057", "name": "CEA"}
+
+      
+
+
 
     
 
