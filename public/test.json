@@ -105,7 +105,8 @@
           {"code": "C258", "name": "URINE PROTEIN CREATINE RATIO"},
            {"code": "C175", "name": "TROP I "},
             {"code": "C013", "name": "UACR"},
-             {"code": "C030", "name": "ACR"}
+             {"code": "C030", "name": "ACR"},
+             {"code" : "C131", "name": "LH"}
       
 
       
